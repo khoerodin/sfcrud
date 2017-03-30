@@ -97,7 +97,68 @@ class TodoController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        return $this->render('todo/edit.html.twig');
+        $now = new\DateTime('now');
+
+        $todo = $this->getDoctrine()
+            ->getRepository('AppBundle:Todo')
+            ->find($id);
+
+        $todo->setName($todo->getName());
+        $todo->setCategory($todo->getCategory());
+        $todo->setDescription($todo->getDescription());
+        $todo->setPriority($todo->getPriority());
+        $todo->setDueDate($todo->getDueDate());
+        $todo->setCreateDate($now);
+
+        $form = $this->createFormBuilder($todo)
+            ->add('name', TextType::class)
+            ->add('category', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('priority', ChoiceType::class, [
+                'choices' => [
+                    'Low' => 'low',
+                    'Medium' => 'medium',
+                    'High' => 'high']
+            ])
+            ->add('due_date', DateTimeType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $name = $form['name']->getData();
+            $category = $form['category']->getData();
+            $description = $form['description']->getData();
+            $priority = $form['priority']->getData();
+            $due_date = $form['due_date']->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $todo = $em->getRepository('AppBundle:Todo')->find($id);
+            $todo->setName($name);
+            $todo->setCategory($category);
+            $todo->setDescription($description);
+            $todo->setPriority($priority);
+            $todo->setDueDate($due_date);
+            $todo->setCreateDate($now);
+
+
+            $em->persist($todo);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Todo Updated'
+            );
+
+            return $this->redirectToRoute('todo_index');
+        }
+
+        return $this->render('todo/edit.html.twig', array(
+            'todo' => $todo,
+            'form' => $form->createView()
+        ));
 
     }
 
@@ -113,6 +174,26 @@ class TodoController extends Controller
         return $this->render('todo/details.html.twig', array(
             'todo' => $todo
         ));
+
+    }
+
+    /**
+     * @Route("/todo/delete/{id}", name="todo_delete")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $todo = $em->getRepository('AppBundle:Todo')->find($id);
+
+        $em->remove($todo);
+        $em->flush();
+
+        $this->addFlash(
+            'notice',
+            'Todo Removed'
+        );
+
+        return $this->redirectToRoute('todo_index');
 
     }
 
