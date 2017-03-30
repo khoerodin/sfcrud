@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table border="1">
+        <tr>
+            <th>NO</th>
+            <th>NAME</th>
+            <th>CATEGORY</th>
+            <th>DESCRIPTION</th>
+            <th>DUE</th>
+            <th>ACTION</th>
+        </tr>
+
+        {% for todo in todos %}
+        <tr>
+            <td>nomor</td>
+            <td>{{ todo.name }}</td>
+            <td>{{ todo.category }}</td>
+            <td>{{ todo.description }}</td>
+            <td>{{ todo.dueDate | date('F j, Y, g:i:A') }}</td>
+            <td>
+                <a href="/todo/details/{{ todo.id }}">View</a>
+                <a href="/todo/edit/{{ todo.id }}">Edit</a>
+                <a href="/todo/delete/{{ todo.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,24 @@
+<table border="1">
+    <tr>
+        <td>NAME</td>
+        <td>{{ todo.name }}</td>
+    </tr>
+    <tr>
+        <td>CATEGORY</td>
+        <td>{{ todo.category }}</td>
+    </tr>
+    <tr>
+        <td>PRIORITY</td>
+        <td>{{ todo.priority }}</td>
+    </tr>
+    <tr>
+        <td>DESCRIPTION</td>
+        <td>{{ todo.description }}</td>
+    </tr>
+    <tr>
+        <td>DUE</td>
+        <td>{{ todo.dueDate | date('F j, Y, g:i:A') }}</td>
+    </tr>
+</table>
+<br>
+<a href="/todos">Go to Todo index</a>
