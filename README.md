@@ -1,4 +1,4 @@
 SfCRUD
 =========
 
-Super simple CRUD buld with Symfony 3
+Super simple CRUD build with Symfony 3
