@@ -1,24 +1,14 @@
-<table border="1">
-    <tr>
-        <td>NAME</td>
-        <td>{{ todo.name }}</td>
-    </tr>
-    <tr>
-        <td>CATEGORY</td>
-        <td>{{ todo.category }}</td>
-    </tr>
-    <tr>
-        <td>PRIORITY</td>
-        <td>{{ todo.priority }}</td>
-    </tr>
-    <tr>
-        <td>DESCRIPTION</td>
-        <td>{{ todo.description }}</td>
-    </tr>
-    <tr>
-        <td>DUE</td>
-        <td>{{ todo.dueDate | date('F j, Y, g:i:A') }}</td>
-    </tr>
-</table>
-<br>
-<a href="/todos">Go to Todo index</a>
+{% extends 'base.html.twig' %}
+
+{% block title %}Details of Todo{% endblock %}
+
+{% block body %}
+    <h5>DETAILS OF TODO</h5>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>NAME:</strong>&nbsp;{{ todo.name }}</li>
+        <li class="list-group-item"><strong>CATEGORY:</strong>&nbsp;{{ todo.category }}</li>
+        <li class="list-group-item"><strong>PRIORITY:</strong>&nbsp;{{ todo.priority }}</li>
+        <li class="list-group-item"><strong>DESCRIPTION:</strong>&nbsp;{{ todo.description }}</li>
+        <li class="list-group-item"><strong>DUE:</strong>&nbsp;{{ todo.dueDate | date('F j, Y, g:i:A') }}</li>
+    </ul>
+{% endblock %}

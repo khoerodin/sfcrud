@@ -1,4 +1,10 @@
-<h1>CREATE TODO</h1>
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Create a new todo{% endblock %}
+
+{% block body %}
+    <h5>CREATE A NEW TODO</h5>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,6 +1,10 @@
-<h1>EDIT TODO</h1>
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
-<br>
-<a href="/todos">Go to Todo index</a>
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Todo{% endblock %}
+
+{% block body %}
+    <h5>EDIT TODO</h5>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

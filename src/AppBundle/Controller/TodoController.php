@@ -42,17 +42,38 @@ class TodoController extends Controller
         $todo = new Todo();
 
         $form = $this->createFormBuilder($todo)
-            ->add('name', TextType::class)
-            ->add('category', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add('name', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control form-control-sm'
+                ]
+            ])
+            ->add('category', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control form-control-sm'
+                ]
+            ])
+            ->add('description', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
             ->add('priority', ChoiceType::class, [
                 'choices' => [
                     'Low' => 'low',
                     'Medium' => 'medium',
-                    'High' => 'high']
+                    'High' => 'high'
+                ],
+                'attr' => [
+                    'class' => 'form-control form-control-sm'
+                ]
             ])
             ->add('due_date', DateTimeType::class)
-            ->add('save', SubmitType::class)
+            ->add('create', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                    'style' => 'margin-top: 20px;'
+                ]
+            ])
             ->getForm();
 
         $form->handleRequest($request);
@@ -110,17 +131,38 @@ class TodoController extends Controller
         $todo->setCreateDate($now);
 
         $form = $this->createFormBuilder($todo)
-            ->add('name', TextType::class)
-            ->add('category', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add('name', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control form-control-sm'
+                ]
+            ])
+            ->add('category', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control form-control-sm'
+                ]
+            ])
+            ->add('description', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
             ->add('priority', ChoiceType::class, [
                 'choices' => [
                     'Low' => 'low',
                     'Medium' => 'medium',
-                    'High' => 'high']
+                    'High' => 'high'
+                ],
+                'attr' => [
+                    'class' => 'form-control form-control-sm'
+                ]
             ])
             ->add('due_date', DateTimeType::class)
-            ->add('save', SubmitType::class)
+            ->add('update', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                    'style' => 'margin-top: 20px;'
+                ]
+            ])
             ->getForm();
 
         $form->handleRequest($request);
