@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class TodoRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function withCategory()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT t, c FROM AppBundle:Todo t
+                JOIN t.category c'
+            );
+
+        try {
+            return $query->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
 }

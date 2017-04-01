@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'todo.html.twig' %}
 
 {% block title %}Index of todos{% endblock %}
 
@@ -15,20 +15,21 @@
                 <th></th>
             </tr>
         <thead>
-
+        {% set number = 0 %}
         {% for todo in todos %}
-        <tr>
-            <td>nomor</td>
-            <td>{{ todo.name }}</td>
-            <td>{{ todo.category }}</td>
-            <td>{{ todo.description }}</td>
-            <td>{{ todo.dueDate | date('F j, Y, g:i:A') }}</td>
-            <td>
-                <a href="/todo/details/{{ todo.id }}" class="btn btn-success btn-sm">View</a>
-                <a href="/todo/edit/{{ todo.id }}" class="btn btn-info btn-sm">Edit</a>
-                <a href="/todo/delete/{{ todo.id }}" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-        </tr>
+            {% set number = number + 1 %}
+            <tr>
+                <td>{{ number }}</td>
+                <td>{{ todo.name }}</td>
+                <td>{{ todo.category.category }}</td>
+                <td>{{ todo.description }}</td>
+                <td>{{ todo.dueDate | date('F j, Y, g:i:A') }}</td>
+                <td>
+                    <a href="/todo/details/{{ todo.id }}" class="btn btn-success btn-sm">View</a>
+                    <a href="/todo/edit/{{ todo.id }}" class="btn btn-info btn-sm">Edit</a>
+                    <a href="/todo/delete/{{ todo.id }}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
         {% endfor %}
     </table>
 {% endblock %}

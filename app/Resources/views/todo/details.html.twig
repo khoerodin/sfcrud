@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'todo.html.twig' %}
 
 {% block title %}Details of Todo{% endblock %}
 
@@ -6,7 +6,7 @@
     <h5>DETAILS OF TODO</h5>
     <ul class="list-group">
         <li class="list-group-item"><strong>NAME:</strong>&nbsp;{{ todo.name }}</li>
-        <li class="list-group-item"><strong>CATEGORY:</strong>&nbsp;{{ todo.category }}</li>
+        <li class="list-group-item"><strong>CATEGORY:</strong>&nbsp;{{ todo.category.category }}</li>
         <li class="list-group-item"><strong>PRIORITY:</strong>&nbsp;{{ todo.priority }}</li>
         <li class="list-group-item"><strong>DESCRIPTION:</strong>&nbsp;{{ todo.description }}</li>
         <li class="list-group-item"><strong>DUE:</strong>&nbsp;{{ todo.dueDate | date('F j, Y, g:i:A') }}</li>

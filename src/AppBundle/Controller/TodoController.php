@@ -9,6 +9,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Todo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -26,7 +27,7 @@ class TodoController extends Controller
     {
         $todos = $this->getDoctrine()
             ->getRepository('AppBundle:Todo')
-            ->findAll();
+            ->withCategory();
 
         return $this->render('todo/index.html.twig', array(
             'todos' => $todos
@@ -47,7 +48,9 @@ class TodoController extends Controller
                     'class' => 'form-control form-control-sm'
                 ]
             ])
-            ->add('category', TextType::class, [
+            ->add('category', EntityType::class, [
+                'class' => 'AppBundle:Category',
+                'choice_label' => 'category',
                 'attr' => [
                     'class' => 'form-control form-control-sm'
                 ]
@@ -136,7 +139,9 @@ class TodoController extends Controller
                     'class' => 'form-control form-control-sm'
                 ]
             ])
-            ->add('category', TextType::class, [
+            ->add('category', EntityType::class, [
+                'class' => 'AppBundle:Category',
+                'choice_label' => 'category',
                 'attr' => [
                     'class' => 'form-control form-control-sm'
                 ]

@@ -3,29 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        {% endblock %}
+        {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <div class="container">
-            <div class="header clearfix">
-                <h3 class="text-muted"><a href="/todos">Todo-List</a></h3>
-            </div>
+        {% block body %}{% endblock %}
 
-            {% for flash_message in app.session.flashbag.get('notice') %}
-                <div class="alert alert-success" role="alert">{{ flash_message }}</div>
-            {% endfor %}
-
-            {% for flash_message in app.session.flashbag.get('error') %}
-                <div class="alert alert-danger" role="alert">{{ flash_message }}</div>
-            {% endfor %}
-
-            {% block body %}{% endblock %}
-
-            {% block javascripts %}{% endblock %}
-        </div>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>
